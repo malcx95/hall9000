@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { MainComponent } from './Pages/main.component'
+import { RouterModule } from '@angular/router';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+@Component ({
+   selector: 'app-root',
+   template: '<a [routerLink] = "[\'Main\']"> Mein </a><router-outlet></router-outlet>'
 })
-export class AppComponent {
-  title = 'app';
-}
+export class AppComponent  {}
