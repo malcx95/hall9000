@@ -6,21 +6,32 @@
             [compojure.handler :as handler])
   (:gen-class))
 
-(defn index []
-  (file-response ""))
+(def frontend-path "../frontend/quickstart/dist")
 
-(defn handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (str "Hello World" request)})
+(defn index []
+  (file-response "index.html" {:root frontend-path}))
+
+;; (defn handler [request]
+;;   {:status 200
+;;    :headers {"Content-Type" "text/html"}
+;;    :body (str "Hello World" request)})
 
 (defroutes app
-  (GET "/" [] "<h1>Hello world</h1>")
+  (GET "/" [] (index))
   (GET "/user/:id" [id]
        (str "<h1>Hello user " id "</h1>"))
+  (route/files "/" {:root frontend-path})
+  ;; (route/files "/" {:root "../frontend/quickstart"})
   (route/not-found "<h1>Page not found</h1>"))
 
+(defn start-server []
+  (def server (run-jetty app {:port 8080 :join? false})))
+
+(defn restart-server []
+  (.stop server)
+  (start-server))
+
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Starts the web server"
   [& args]
-  (println "Hello, World!"))
+  (run-jetty app {:port 8080}))
