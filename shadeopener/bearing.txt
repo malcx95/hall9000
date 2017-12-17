@@ -1,0 +1,3 @@
+Inner diameter = 5mm
+Outer diameter = 10mm
+Width = 4mm
