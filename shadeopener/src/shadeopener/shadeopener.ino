@@ -6,7 +6,7 @@ void setup() {
     
     servo.attach(2);
 
-    servo.writeMicroseconds(1500);
+    servo.writeMicroseconds(2000);
     
     Serial.begin(9600);
 
@@ -18,8 +18,16 @@ void loop() {
 
     Serial.println("Hejhej");
     
+    servo.writeMicroseconds(2000);
 
     delay(1000);
 
+    servo.writeMicroseconds(1000);
+
+    delay(1000);
+
+    servo.writeMicroseconds(1500);
+
+    delay(1000);
 
 }
