@@ -1,12 +1,16 @@
 #include <Servo.h>
 
-Servo servo;
+Servo spoolservo;
+Servo angleservo;
 
 void setup() {
     
-    servo.attach(2);
+    pinMode(15, OUTPUT);
+    spoolservo.attach(2);
+    angleservo.attach(0);
 
-    servo.writeMicroseconds(2000);
+    spoolservo.writeMicroseconds(2000);
+    angleservo.writeMicroseconds(1500);
     
     Serial.begin(9600);
 
@@ -18,16 +22,14 @@ void loop() {
 
     Serial.println("Hejhej");
     
-    servo.writeMicroseconds(2000);
+    // spoolservo.writeMicroseconds(2000);
 
-    delay(1000);
+    digitalWrite(15, HIGH);
 
-    servo.writeMicroseconds(1000);
+    delay(2000);
 
-    delay(1000);
+    digitalWrite(15, LOW);
 
-    servo.writeMicroseconds(1500);
-
-    delay(1000);
+    delay(2000);
 
 }

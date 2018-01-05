@@ -1,4 +1,2 @@
-#include "servocontrol.h"
-
-
+#include "servocontrol.hpp"
 

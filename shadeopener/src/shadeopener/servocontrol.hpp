@@ -1,7 +1,11 @@
 #ifndef SERVOCONTROL_H
 #define SERVOCONTROL_H
 
-#include <Servo.h>
+#ifdef IS_UNITTEST
+    #include "unittest/fakeservo.hpp"
+#else
+    #include <Servo.h>
+#endif
 
 enum ServoStatus {
     STANDBY, SPOOL_CLOCKWISE, SPOOL_ANTICLOCKWISE, SHADE_ANGLE_MOVING
@@ -45,11 +49,9 @@ class ServoControl {
          */
         bool set_shade_angle(const float value);
 
-        // TODO add unit tests
-
     private:
 
-        SpoolMovement current_spool_movement;
+        ServoStatus current_spool_movement;
 
         /*
          * The continuous spool servo
