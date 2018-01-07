@@ -13,7 +13,8 @@ enum ServoStatus {
 
 /*
  * Controller of both the continuous spool servo and
- * the servo for angling the shades.
+ * the servo for angling the shades. This handles commanding
+ * the servos to start or stop moving.
  */
 class ServoControl {
    
@@ -37,9 +38,9 @@ class ServoControl {
         bool start_spool_servo(const bool clockwise);
 
         /*
-         * Stops the spool movement.
+         * Stops the spool servo and cuts the power.
          */
-        void stop_spool();
+        void stop_spool_servo();
 
         /*
          * Sets the angle of the shade to the given value
@@ -49,7 +50,20 @@ class ServoControl {
          */
         bool set_shade_angle(const float value);
 
+        /*
+         * Run this function once every Arduino loop iteration,
+         * to make sure the power is cut to the servos when it's supposed to.
+         */
+        void update();
+
+#ifndef IS_UNITTEST
     private:
+#endif
+
+        /*
+         * Enables or disables the power to the servos.
+         */
+        void set_power_enabled(bool val);
 
         ServoStatus current_spool_movement;
 
@@ -62,6 +76,8 @@ class ServoControl {
          * The servo for angling the shades
          */
         Servo angle_servo;
+
+        bool servo_power_enabled;
 
 };
 
