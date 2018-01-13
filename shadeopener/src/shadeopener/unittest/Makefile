@@ -1,5 +1,5 @@
 SOURCES=../servocontrol.hpp ../servocontrol.cpp fakeservo.hpp fakeservo.cpp \
-		servocontroltests.cpp
+		servocontroltests.cpp fakearduino.hpp fakearduino.cpp
 
 TEST_SOURCE=unittestmain.cpp
 

@@ -6,6 +6,8 @@ Servo angleservo;
 void setup() {
     
     pinMode(15, OUTPUT);
+    pinMode(D0, OUTPUT);
+    pinMode(13, INPUT);
     spoolservo.attach(2);
     angleservo.attach(0);
 
@@ -20,16 +22,21 @@ void setup() {
 
 void loop() {
 
-    Serial.println("Hejhej");
+    digitalWrite(D0, digitalRead(13));
+    // Serial.println("Hejhej");
     
+    // angleservo.writeMicroseconds(2000);
+    // spoolservo.writeMicroseconds(1500);
+
+    // delay(2000);
+
+    // angleservo.writeMicroseconds(1000);
+    // spoolservo.writeMicroseconds(1500);
+
+    // delay(2000);
+
     // spoolservo.writeMicroseconds(2000);
 
-    digitalWrite(15, HIGH);
-
-    delay(2000);
-
-    digitalWrite(15, LOW);
-
-    delay(2000);
+    // delay(2000);
 
 }

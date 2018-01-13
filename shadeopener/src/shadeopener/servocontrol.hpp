@@ -7,6 +7,10 @@
     #include <Servo.h>
 #endif
 
+const int SPOOL_CLOCKWISE_MICROS = 2000;
+const int SPOOL_STANDBY_MICROS = 1500;
+const int SPOOL_ANTICLOCKWISE_MICROS = 1000;
+
 enum ServoStatus {
     STANDBY, SPOOL_CLOCKWISE, SPOOL_ANTICLOCKWISE, SHADE_ANGLE_MOVING
 };
@@ -33,7 +37,10 @@ class ServoControl {
         /*
          * Starts running the spool servo in the given
          * direction. If clockwise is true, it spins clockwise,
-         * otherwise it spins anti-clockwise.
+         * otherwise it spins anti-clockwise. Turns on the
+         * servo power. Doesn't start if the angle servo is
+         * already running, in which case false is returned.
+         * Otherwise true is returned.
          */
         bool start_spool_servo(const bool clockwise);
 
@@ -63,7 +70,7 @@ class ServoControl {
         /*
          * Enables or disables the power to the servos.
          */
-        void set_power_enabled(bool val);
+        void set_power_enabled(const bool val);
 
         ServoStatus current_spool_movement;
 

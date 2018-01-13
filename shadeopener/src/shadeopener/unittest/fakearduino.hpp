@@ -13,3 +13,4 @@ void digitalWrite(int val);
 unsigned long millis();
 
 #endif /* ifndef FAKEARDUINO_H */
+
