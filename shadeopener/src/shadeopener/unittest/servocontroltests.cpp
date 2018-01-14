@@ -18,7 +18,7 @@ TEST_CASE("ServoControl initializes with disabled power", "[servocontrol]") {
     }
 
     SECTION("Servos aren't moving") {
-        CHECK(control.current_servo_movement == STANDBY);
+        CHECK(control.current_servo_movement == SERVO_STANDBY);
         CHECK_FALSE(control.servos_running());
         CHECK(control.spool_servo.current_micros == SPOOL_STANDBY_MICROS);
     }
@@ -32,7 +32,7 @@ TEST_CASE("start_spool_servo runs normally", "[servocontrol]") {
     
     SECTION("Servos aren't moving and power is disabled") {
         CHECK_FALSE(control.servo_power_enabled);
-        CHECK(control.current_servo_movement == STANDBY);
+        CHECK(control.current_servo_movement == SERVO_STANDBY);
         CHECK_FALSE(control.servos_running());
     }
 
@@ -49,7 +49,7 @@ TEST_CASE("start_spool_servo runs normally", "[servocontrol]") {
         control.stop_spool_servo();
 
         CHECK_FALSE(control.servo_power_enabled);
-        CHECK(control.current_servo_movement == STANDBY);
+        CHECK(control.current_servo_movement == SERVO_STANDBY);
         CHECK_FALSE(control.servos_running());
         CHECK(control.spool_servo.current_micros == SPOOL_STANDBY_MICROS);
     }
@@ -71,7 +71,7 @@ TEST_CASE("set_shade_angle runs normally", "[servocontrol]") {
     
     SECTION("Servos aren't moving and power is disabled") {
         CHECK_FALSE(control.servo_power_enabled);
-        CHECK(control.current_servo_movement == STANDBY);
+        CHECK(control.current_servo_movement == SERVO_STANDBY);
         CHECK_FALSE(control.servos_running());
     }
 
@@ -88,7 +88,7 @@ TEST_CASE("set_shade_angle runs normally", "[servocontrol]") {
         usleep(ANGLE_SERVO_DELAY_MILLIS * 1000 + 1000);
         control.update();
         CHECK_FALSE(control.servo_power_enabled);
-        CHECK(control.current_servo_movement == STANDBY);
+        CHECK(control.current_servo_movement == SERVO_STANDBY);
         CHECK_FALSE(control.servos_running());
     }
 

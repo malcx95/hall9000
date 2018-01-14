@@ -14,19 +14,19 @@
  */
 
 void ServoControl::init() {
-    this->current_servo_movement = STANDBY;
+    this->current_servo_movement = SERVO_STANDBY;
     this->servo_power_enabled = false;
 }
 
 
 bool ServoControl::servos_running() const {
-    return current_servo_movement != STANDBY;
+    return current_servo_movement != SERVO_STANDBY;
 }
 
 bool ServoControl::start_spool_servo(const bool clockwise) {
 
     // other servos are currently moving, so don't allow this
-    if (this->current_servo_movement != STANDBY) return false;
+    if (this->current_servo_movement != SERVO_STANDBY) return false;
 
     this->set_power_enabled(true);
 
@@ -47,7 +47,7 @@ bool ServoControl::stop_spool_servo() {
         
         this->spool_servo.writeMicroseconds(SPOOL_STANDBY_MICROS);
         this->set_power_enabled(false);
-        this->current_servo_movement = STANDBY;
+        this->current_servo_movement = SERVO_STANDBY;
         return true;
     }
     return false;
@@ -55,7 +55,7 @@ bool ServoControl::stop_spool_servo() {
 
 bool ServoControl::set_shade_angle(const float value) {
     // other servos are currently moving, so don't allow this
-    if (this->current_servo_movement != STANDBY) return false;
+    if (this->current_servo_movement != SERVO_STANDBY) return false;
     
     int micros = CLOSED_SHADE_MICROS - (int)(((float)SHADE_MICROS_RANGE)*value);
     this->set_power_enabled(true);
