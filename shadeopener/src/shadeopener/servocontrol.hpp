@@ -11,6 +11,14 @@ const int SPOOL_CLOCKWISE_MICROS = 2000;
 const int SPOOL_STANDBY_MICROS = 1500;
 const int SPOOL_ANTICLOCKWISE_MICROS = 1000;
 
+const int CLOSED_SHADE_MICROS = 2000;
+const int OPEN_SHADE_MICROS = 1000;
+const int SHADE_MICROS_RANGE = 1000;
+
+const int ANGLE_SERVO_DELAY_MILLIS = 1000;
+const float SHADE_ANGLE_OPEN = 1.0;
+const float SHADE_ANGLE_CLOSED = 0.0;
+
 enum ServoStatus {
     STANDBY, SPOOL_CLOCKWISE, SPOOL_ANTICLOCKWISE, SHADE_ANGLE_MOVING
 };
@@ -45,9 +53,10 @@ class ServoControl {
         bool start_spool_servo(const bool clockwise);
 
         /*
-         * Stops the spool servo and cuts the power.
+         * Stops the spool servo and cuts the power, if the spool
+         * servo was running. Returns false if it wasn't running.
          */
-        void stop_spool_servo();
+        bool stop_spool_servo();
 
         /*
          * Sets the angle of the shade to the given value
@@ -72,7 +81,7 @@ class ServoControl {
          */
         void set_power_enabled(const bool val);
 
-        ServoStatus current_spool_movement;
+        ServoStatus current_servo_movement;
 
         /*
          * The continuous spool servo
@@ -85,6 +94,8 @@ class ServoControl {
         Servo angle_servo;
 
         bool servo_power_enabled;
+
+        unsigned long angle_movement_start_time;
 
 };
 
