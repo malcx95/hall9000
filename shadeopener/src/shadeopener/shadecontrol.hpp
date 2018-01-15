@@ -61,6 +61,13 @@ class ShadeControl {
         int get_current_position() const;
 
         /*
+         * Sets the current revolutions value for the spool.
+         * Useful for when power is cut and it needs to know
+         * in which position it's in.
+         */
+        void set_current_position(const int revolutions);
+
+        /*
          * Returns which number of revolutions that is currently set as the
          * top value.
          */
