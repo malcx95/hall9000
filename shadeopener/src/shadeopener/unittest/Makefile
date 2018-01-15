@@ -1,6 +1,7 @@
 SOURCES=../servocontrol.hpp ../servocontrol.cpp fakeservo.hpp fakeservo.cpp \
 		servocontroltests.cpp fakearduino.hpp fakearduino.cpp \
-		fakehallsensor.hpp fakehallsensor.cpp ../shadecontrol.hpp ../shadecontrol.cpp
+		fakehallsensor.hpp fakehallsensor.cpp ../shadecontrol.hpp \
+		../shadecontrol.cpp shadecontroltests.cpp
 
 TEST_SOURCE=unittestmain.cpp
 

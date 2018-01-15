@@ -1,5 +1,9 @@
 #include "shadecontrol.hpp"
 
+void ShadeControl::init() {
+    // TODO implement
+}
+
 bool ShadeControl::set_shade_angle(const float value){
     // TODO implement
     return false;

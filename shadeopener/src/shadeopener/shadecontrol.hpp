@@ -22,6 +22,11 @@ class ShadeControl {
     public:
 
         /*
+         * Initializes the shadecontrol.
+         */
+        void init();
+
+        /*
          * Starts setting the angle of the shade to the given value
          * between 0-1, 1 means fully open, 0 means fully closed.
          * Returns false if the servos are busy at the moment.
@@ -93,6 +98,10 @@ class ShadeControl {
 #ifndef IS_UNITTEST
     private:
 #endif
+
+        float current_shade_angle;
+
+        int current_revolutions;
 
         HallSensor hall_sensor;
 

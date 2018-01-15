@@ -5,14 +5,6 @@
     #include "unittest/fakearduino.hpp"
 #endif
 
-/*
- * TODO: implement update such that it checks
- * how long ago we set the angle servo moving, and
- * cuts the power to it once we have waited a certain
- * amount of time. Also implement millis() in fakearduino
- * so we can test it.
- */
-
 void ServoControl::init() {
     this->current_servo_movement = SERVO_STANDBY;
     this->servo_power_enabled = false;
