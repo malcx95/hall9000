@@ -31,12 +31,46 @@ TEST_CASE("ShadeControl can go to top spool position") {
     control.set_top_position(10);
     control.set_current_position(0);
 
+
     // every other measurement returns true
     for (int i = 0; i < 30; ++i) {
-        control.enqueue_measurement(i % 2 == 0);
+        control.hall_sensor.enqueue_measurement(i % 2 == 0);
     }
 
-    // TODO finish
+    // start rolling the shades up
+    control.set_shades_position(10);
 
+    REQUIRE(control.current_status == SHADES_ROLLING_UP);
+    int expected_revolutions = 0;
+
+    // revolutions should every other time update() is called
+    for (int i = 0; i < 20; ++i) {
+        CHECK(control.current_revolutions == expected_revolutions);
+        expected_revolutions += i % 2 == 0;
+        control.update();
+    }
+
+    CHECK(control.current_status == STANDBY);
+}
+
+TEST_CASE("ShadeControl times out when rolling up") {
+
+    ShadeControl control;
+    control.init();
+
+    control.set_top_position(10);
+    control.set_current_position(0);
+
+    control.set_shades_position(10);
+
+    unsigned long time = millis();
+
+    REQUIRE(control.current_status == SHADES_ROLLING_UP);
+
+    while (millis() - time < SHADE_TIMEOUT_MILLIS) {
+        control.update();
+    }
+    
+    CHECK(control.current_status == TIMEOUT);
 }
 

@@ -11,6 +11,6 @@ bool HallSensor::measure() {
 }
 
 void HallSensor::enqueue_measurement(const bool val) {
-    this->measurements.enqueue(val);
+    this->measurements.push(val);
 }
 

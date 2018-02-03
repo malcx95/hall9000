@@ -40,10 +40,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 
 }
 
-long i;
-
 void setup() {
-    i = 0;
     
     pinMode(15, OUTPUT);
     pinMode(D0, OUTPUT);
@@ -66,7 +63,7 @@ void setup() {
         delay(100);
     }
     
-    webSocket.begin("192.168.0.123", 81, "/");
+    webSocket.begin("192.168.1.178", 8080, "/ws");
 
     webSocket.onEvent(webSocketEvent);
 
@@ -94,8 +91,5 @@ void loop() {
     // spoolservo.writeMicroseconds(2000);
 
     // delay(2000);
-
-    Serial.println(i);
-    ++i;
 
 }

@@ -14,6 +14,13 @@ enum ShadeStatus {
     SHADES_ROLLING_UP, SHADES_ROLLING_DOWN, SHADE_ANGLE_CHANGING
 };
 
+#ifdef IS_UNITTEST
+// so we don't have to wait for an eternity
+const int SHADE_TIMEOUT_MILLIS = 100;
+#else
+const int SHADE_TIMEOUT_MILLIS = 3000;
+#endif
+
 /*
  * High-level controller for the shades.
  */
