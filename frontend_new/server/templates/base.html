@@ -1,0 +1,118 @@
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+        {% if title %}
+        <title>{{ title }} - Le Sité</title>
+        {% else %}
+        <title>Le sité</title>
+        {% endif %}
+    </head>
+    <body>
+    <center>
+{% block nav %}
+      <!-- The justified navigation menu is meant for single line per list item.
+           Multiple lines will require custom code not provided by Bootstrap. -->
+      <div class="masthead" >
+        {% if not(current_user.is_anonymous) %}
+        <h3 class="text-muted">Le Sité</h3>
+        {% endif %}
+        <nav>
+          <ul class="nav nav-justified">
+            {% if current_user.is_anonymous %}
+            {% else %}
+            <li class="active"><a href="{{url_for('index')}}">Home</a></li>
+
+
+
+            <li><a href="#" data-toggle="tooltip" title="Read wall of text about us!" onclick="loadAbout()">About</a></li>
+            <li ><a href="{{url_for('bookpage')}}" data-toggle="tooltip" title="See our books!">Books</a></li>
+            <li ><a href="{{url_for('contact')}}">Contact</a></li>
+            <li ><a href="{{url_for('logout')}}">logout</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+{% endblock %}
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <div class="container">
+        {% block content %}
+        {% endblock %}
+        </div>
+    </center>
+
+        <script>
+            function postForm(id){
+                $.post("/form/submit", function(data){
+                return;
+                });
+            }
+            function test(){
+                $
+                var fname = $("input#fname").val();
+                var lname = $("input#lname").val();
+                var email = $("input#email").val();
+                var message = $("textarea#message").val();
+                if (fname == "" || lname == "" || message == "" || email == ""){
+                    alert("FYLL I SKITEN RÄTT DITT JÄVLA DUMHUVE");
+                }
+                else{
+                    var data = { firstname: fname, lastname: lname, email: email, msg: message};
+                    console.log(JSON.stringify(data));
+                }
+                $.post("/contac", data);
+
+            }
+            function loadBook(){
+                $(".book").load("/book_template");
+                $("#book").hide();
+            }
+            function loadBooks(){
+                $(".container").load("/books");
+            }
+            function loadAbout(){
+                $(".container").load("/about");
+            }
+            function loadHome(){
+                $(".container").load("/index");
+            }
+            function get(id){
+                $("#book").show();
+                $.getJSON("/book/"+id, function(data,status){
+                    document.getElementById("title").innerHTML = "<h1>"+data.title+"</h1>";
+                    document.getElementById("img").innerHTML = "<img src="+data.img+" width='50%' height='50%'></img>";
+                    document.getElementById("author").innerHTML = "<h1>"+data.author+"</h1>";
+                    document.getElementById("content").innerHTML = data.content;
+                });
+
+                $("#booklist").hide();
+            }
+            function back(){
+                $("#book").hide();
+                $("#booklist").show();
+
+            }
+        </script>
+
+    </body>
+</html>

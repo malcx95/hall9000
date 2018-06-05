@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+{% block nav %}
+{{super()}}
+{% endblock %}
+{% block content %}
+<div>
+    <head>
+
+        <title> Home Page </title>
+    </head>
+    <header>Contact</header>
+    <body>
+
+      <form>
+
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+
+
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+        <label for="email">email</label>
+        <input type="text" id="email" name="email" placeholder="Your email">
+
+
+
+        <div>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write something.." style="height:200px"></textarea>
+        <!--button class="btn btn-primary" onClick="test()"></button>
+        <input class="btn btn-primary" onClick="test()" type="submit" value="Submit"-->
+
+
+
+        </div>
+
+
+
+
+
+     </form>
+     <button class="btn btn-primary" onClick="test()"></button>
+     <div>
+         {% for message in messages %}
+         <hr>
+         <h1>  From   {{message.firstnamn}} {{message.lastname}} </h1>
+         <h1>  Message:   {{message.msg}} </h1>
+         {% endfor %}
+     </div>
+
+
+
+
+
+
+        {% for post in posts %}
+
+        <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+        {% endfor %}
+    <body/>
+        <script>
+            $( "form" ).submit(function( event ) {
+                //test();
+            });
+        </script>
+</div>
+{% endblock %}

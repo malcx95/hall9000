@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block nav %}
+{{super()}}
+{% endblock %}
+{% block content %}
+    <head>
+        <title> Book Page </title>
+    </head>
+    <body>
+        <div  id="booklist" style="overflow-y: scroll; height:100%;">
+            <header>Books</header>
+                {% for book in books %}
+                    <h1>title: {{ book.title }}!</h1>
+                    <h1>Author: {{ book.author }}!</h1>
+                    <img src= {{book.img}} width="50%" height="50%" onclick="get({{book.id}})" ></img>
+                {% endfor %}
+        </div>
+        <div class="book" id="book" style="display:none">
+        <button onclick="back()">Back</button>
+        <div id="title"></div>
+        <div id="img"></div>
+        <div id="author"></div>
+        <div id="content"></div>
+        </div>
+    </div>
+    <body/>
+
+{% endblock %}
