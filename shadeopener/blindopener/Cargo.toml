@@ -2,6 +2,5 @@
 name = "blindopener"
 version = "0.1.0"
 authors = ["TheZoq2 <frans.skarman@gmail.com>"]
-edition = "2018"
 
 [dependencies]
