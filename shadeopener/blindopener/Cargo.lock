@@ -1,0 +1,14 @@
+[[package]]
+name = "blindopener"
+version = "0.1.0"
+dependencies = [
+ "sysfs-pwm 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "sysfs-pwm"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum sysfs-pwm 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "267589d5f86a21e4da23c23be6083a6bcc42b3ea90ab952cda36917231e22849"
